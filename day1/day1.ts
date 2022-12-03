@@ -1,11 +1,12 @@
-const events = require("events");
-const fs = require("fs");
-const readline = require("readline");
+import * as events from "events";
+import * as fs from "fs";
+import * as readline from "readline";
 
-(async function processLineByLine() {
+const processLineByLine = async ({ fileName }: { fileName: string }) => {
+  console.log("foo2");
   try {
     const rl = readline.createInterface({
-      input: fs.createReadStream("broadband.sql"),
+      input: fs.createReadStream(fileName),
       crlfDelay: Infinity,
     });
 
@@ -23,4 +24,7 @@ const readline = require("readline");
   } catch (err) {
     console.error(err);
   }
-})();
+};
+
+console.log("foo");
+processLineByLine({ fileName: "./day1/input.txt" });

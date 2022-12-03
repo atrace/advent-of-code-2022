@@ -4,8 +4,14 @@
   "description": "Anjali's Advent of Code solutions for 2022",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pls": "tsc ./day1/day1.ts && node ./day1/day1.js"
   },
   "author": "Anjali",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.11.10",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  }
 }
