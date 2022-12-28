@@ -4,8 +4,10 @@
   "description": "Anjali's Advent of Code solutions for 2022",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "pls": "tsc ./day1/day1.ts && node ./day1/day1.js"
+    "test": "jest --watch",
+    "day1": "tsc ./day1/day1.ts && node ./day1/day1.js",
+    "day2": "tsc ./day2/day2.ts && node ./day2/day2.js",
+    "day3": "tsc ./day3/day3.ts && node ./day3/day3.js",
   },
   "author": "Anjali",
   "license": "ISC",
@@ -13,5 +15,13 @@
     "@types/node": "^18.11.10",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/jest": "^29.2.4",
+    "babel-jest": "^29.3.1",
+    "jest": "^29.3.1"
   }
 }
