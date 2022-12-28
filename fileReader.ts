@@ -21,6 +21,7 @@ export const processLineByLine = async ({
 
     rl.on("line", processLine);
 
+    //@ts-ignore ts-2339
     await events.once(rl, "close");
 
     console.log("Reading file line by line with readline done.");
