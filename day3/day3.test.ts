@@ -1,8 +1,10 @@
 import {
-  day3,
   getCompartments,
-  getSharedItem,
+  getSharedItems,
+  getSharedItemsForMultiple,
   itemToPriority,
+  part1,
+  part2,
   splitIntoLines,
 } from "./day3";
 
@@ -28,18 +30,47 @@ describe("getCompartments", () => {
   );
 });
 
-describe("getShared", () => {
-  it("should get the shared letter from both compartments", () => {
+describe("getSharedItems", () => {
+  it("should get the single shared letter from both compartments", () => {
     // Arrange
     const compartment1 = "vJrwpWtwJgWr";
     const compartment2 = "hcsFMMfFFhFp";
 
     // Act
-    const result = getSharedItem(compartment1, compartment2);
+    const result = getSharedItems(compartment1, compartment2);
 
     // Assert
-    expect(result).toEqual("p");
+    expect(result.length).toEqual(1);
+    expect(result[0]).toEqual("p");
   });
+});
+
+describe("getSharedItemsBetweenBags", () => {
+  it.each([
+    [
+      "r",
+      "vJrwpWtwJgWrhcsFMMfFFhFp",
+      "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+      "PmmdzqPrVvPwwTWBwg",
+    ],
+    [
+      "Z",
+      "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+      "ttgJtRGJQctTZtZT",
+      "CrZsJsPPZsGzwwsLwLmpwMDw",
+    ],
+  ])(
+    "should get the single shared letter %p from 3 elves' bags",
+    (expectedSharedItem, bag1, bag2, bag3) => {
+      // Arrange / Act
+      const result = getSharedItemsForMultiple([bag1, bag2, bag3]);
+
+      // Assert
+      console.log("🚀 ~ result", result);
+      expect(result[0]).toEqual(expectedSharedItem);
+      expect(result.length).toEqual(1);
+    }
+  );
 });
 
 describe("itemToPriority", () => {
@@ -79,8 +110,8 @@ CrZsJsPPZsGzwwsLwLmpwMDw`;
   });
 });
 
-describe("day3", () => {
-  it("should calculate the sum of the priorities of shared items", () => {
+describe("part1", () => {
+  it("should calculate the sum of the priorities of shared items per bag", () => {
     // Arrange
     const bags = [
       "vJrwpWtwJgWrhcsFMMfFFhFp",
@@ -92,6 +123,23 @@ describe("day3", () => {
     ];
 
     // Act / Assert
-    expect(day3(bags)).toEqual(157);
+    expect(part1(bags)).toEqual(157);
+  });
+});
+
+describe("part2", () => {
+  it("should calculate the sum of the priorities of shared items between 3 elves' bags", () => {
+    // Arrange
+    const bags = [
+      "vJrwpWtwJgWrhcsFMMfFFhFp",
+      "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+      "PmmdzqPrVvPwwTWBwg",
+      "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+      "ttgJtRGJQctTZtZT",
+      "CrZsJsPPZsGzwwsLwLmpwMDw",
+    ];
+
+    // Act / Assert
+    expect(part2(bags)).toEqual(70);
   });
 });
