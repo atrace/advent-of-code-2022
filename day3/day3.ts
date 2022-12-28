@@ -1,3 +1,4 @@
+import { splitIntoLines } from "../shared/splitIntoLines";
 import { input } from "./input";
 
 export const getCompartments = (bagContents: string) => {
@@ -37,10 +38,6 @@ export const getSharedItemsForMultiple = (bags: string[]): string[] => {
 
 export const itemToPriority = (item: string): number =>
   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(item) + 1;
-
-export const splitIntoLines = (chunk: string): string[] => {
-  return chunk.split("\n");
-};
 
 export const part1 = (bags: string[]): number => {
   var totalPriorities = 0;

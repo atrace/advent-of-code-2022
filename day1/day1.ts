@@ -1,4 +1,4 @@
-import { processLineByLine } from "../fileReader";
+import { processLineByLine } from "../shared/fileReader";
 
 const state: { currentCount: number; previousCounts: number[] } = {
   currentCount: 0,

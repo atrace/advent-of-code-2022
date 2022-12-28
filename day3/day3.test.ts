@@ -5,7 +5,6 @@ import {
   itemToPriority,
   part1,
   part2,
-  splitIntoLines,
 } from "./day3";
 
 describe("getCompartments", () => {
@@ -85,28 +84,6 @@ describe("itemToPriority", () => {
     ["v", 22],
   ])("should, for item %p, return priority %p", (item, priority) => {
     expect(itemToPriority(item)).toEqual(priority);
-  });
-});
-
-describe("splitIntoLines", () => {
-  it("should split a chunk into lines", () => {
-    // Arrange
-    const chunk = `vJrwpWtwJgWrhcsFMMfFFhFp
-jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
-PmmdzqPrVvPwwTWBwg
-wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
-ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw`;
-
-    // Act / Assert
-    expect(splitIntoLines(chunk)).toEqual([
-      "vJrwpWtwJgWrhcsFMMfFFhFp",
-      "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
-      "PmmdzqPrVvPwwTWBwg",
-      "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
-      "ttgJtRGJQctTZtZT",
-      "CrZsJsPPZsGzwwsLwLmpwMDw",
-    ]);
   });
 });
 
