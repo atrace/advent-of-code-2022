@@ -162,7 +162,7 @@ export const getDirectorySizesAboveThresholdSize = (
 ): number[] => {
   var sufficientDirectorySizes: number[] = [];
 
-  if (directory.size > thresholdSize) {
+  if (directory.size >= thresholdSize) {
     sufficientDirectorySizes.push(directory.size);
   }
 
@@ -173,11 +173,11 @@ export const getDirectorySizesAboveThresholdSize = (
       case ItemType.file:
         break;
       case ItemType.sized_directory:
-        if (item.size > thresholdSize) {
+        if (item.size >= thresholdSize) {
           sufficientDirectorySizes.push(item.size);
         }
-        sufficientDirectorySizes.concat(
-          sumDirectoriesWithSizeUnder100000(item)
+        sufficientDirectorySizes = sufficientDirectorySizes.concat(
+          getDirectorySizesAboveThresholdSize(item, thresholdSize)
         );
 
         break;
@@ -198,10 +198,12 @@ export const spaceFreedByDeletingSmallestSuffcientDirectory = (
     directory,
     spaceNeeded
   );
+  console.log("🚀 ~ sufficientDirectories", sufficientDirectories);
 
   sufficientDirectories.sort((a, b) => {
     return a - b;
   });
+  console.log("🚀 ~ sufficientDirectories", sufficientDirectories);
 
   return sufficientDirectories[0];
 };
@@ -226,6 +228,7 @@ export const part2 = (input: string[]): number => {
     requiredUnusedSpace,
     directorySize
   );
+  console.log("🚀 ~ spaceNeeded", spaceNeeded);
 
   return spaceFreedByDeletingSmallestSuffcientDirectory(
     sizedDirectoryTree,
