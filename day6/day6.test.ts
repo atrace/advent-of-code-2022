@@ -1,4 +1,8 @@
-import { charactersToFirstMarker, isUnique } from "./day6";
+import {
+  charactersToFirstStartOfMessageMarker,
+  charactersToFirstStartOfPacketMarker,
+  isUnique,
+} from "./day6";
 
 describe("isUnique", () => {
   it("should return false when duplicates present", () => {
@@ -24,7 +28,7 @@ describe("isUnique", () => {
   });
 });
 
-describe("charactersToFirstMarker", () => {
+describe("charactersToFirstStartOfPacketMarker", () => {
   it.each([
     ["mjqjpqmgbljsphdztnvjfqwrcgsmlb", 7],
     ["bvwbjplbgvbhsrlpgdmjqwftvncz", 5],
@@ -32,9 +36,28 @@ describe("charactersToFirstMarker", () => {
     ["nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 10],
     ["zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11],
   ])(
-    "should identify first marker in %p after %p characters",
+    "should identify first packet marker in %p after %p characters",
     (datastreamBuffer, expected) => {
-      expect(charactersToFirstMarker(datastreamBuffer)).toBe(expected);
+      expect(charactersToFirstStartOfPacketMarker(datastreamBuffer)).toBe(
+        expected
+      );
+    }
+  );
+});
+
+describe("charactersToFirstStartOfMessageMarker", () => {
+  it.each([
+    ["mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19],
+    ["bvwbjplbgvbhsrlpgdmjqwftvncz", 23],
+    ["nppdvjthqldpwncqszvftbrmjlhg", 23],
+    ["nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29],
+    ["zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26],
+  ])(
+    "should identify first message marker in %p after %p characters",
+    (datastreamBuffer, expected) => {
+      expect(charactersToFirstStartOfMessageMarker(datastreamBuffer)).toBe(
+        expected
+      );
     }
   );
 });

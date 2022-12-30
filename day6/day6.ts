@@ -10,21 +10,46 @@ export const isUnique = (input: string[]): boolean => {
   return true;
 };
 
-export const charactersToFirstMarker = (datastreamBuffer: string): number => {
-  var lastFourCharacters: string[] = [];
+export const charactersToFirstMarker = (
+  datastreamBuffer: string,
+  markerLength: number
+): number => {
+  var searchWindow: string[] = [];
   const chars = datastreamBuffer.split("");
 
   for (let index = 0; index < chars.length; index++) {
-    lastFourCharacters.push(chars[index]);
-    if (lastFourCharacters.length <= 4) {
+    searchWindow.push(chars[index]);
+    if (searchWindow.length <= markerLength) {
       continue;
     }
-    lastFourCharacters.shift();
+    searchWindow.shift();
 
-    if (isUnique(lastFourCharacters.slice())) {
+    // Use slice to make a copy of the array here, else js
+    // would pass by reference and mutate the original array
+    if (isUnique(searchWindow.slice())) {
       return index + 1;
     }
   }
 };
 
-console.log("The answer to part 1 is...", charactersToFirstMarker(input));
+export const charactersToFirstStartOfPacketMarker = (
+  datastreamBuffer: string
+): number => {
+  return charactersToFirstMarker(datastreamBuffer, 4);
+};
+
+export const charactersToFirstStartOfMessageMarker = (
+  datastreamBuffer: string
+): number => {
+  return charactersToFirstMarker(datastreamBuffer, 14);
+};
+
+console.log(
+  "The answer to part 1 is...",
+  charactersToFirstStartOfPacketMarker(input)
+);
+
+console.log(
+  "The answer to part 2 is...",
+  charactersToFirstStartOfMessageMarker(input)
+);
